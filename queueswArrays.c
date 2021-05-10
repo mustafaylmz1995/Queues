@@ -8,44 +8,57 @@ int rear = -1;
 int front = -1;
 const int max = QUEUESIZE;
 
+//Enqueue
 void enqueue(int num) {
-	if (rear == (max - 1)) {
-		printf("Overflow!\n");
-		return;
-	}
-	if ((front == -1) && (rear == -1)) {
+	if ((front == -1) || (rear == -1)) {
 		front = 0;
 		rear = 0;
 	}
+	else if (rear == (max - 1)) {
+		printf("Overflow!\n");
+		return;
+	}
 	else {
 		rear = rear + 1;
+		
 	}
 	queue[rear] = num;
 }
 
-int dequeue(void) {
-	int num;
-	if ((front == -1) || (front > rear)) {
+
+//Dequeue
+void dequeue() {
+
+	if ((front == -1) || (rear == -1) ) {
 		printf("Underflow!\n");
+		return;
 	}
 	else {
-		num = queue[front];
+		queue[front] = 0;
 		front = front + 1;
 	}
-	return num;
+
+
 }
 
 
-void peek(void) {
-	if ((front == -1) || (front > rear)) {
-		printf("Queue is Empty!\n");
+//Peek
+void peek() {
+
+	if ((front == -1) || (rear == -1)) {
+		printf("Queue is empty!\n");
 	}
 	else {
-		printf("Peek value: %d\n", queue[front]);
+		printf("Peek value : %d\n", queue[front]);
 	}
+	
+	return;
+	
 }
 
 
+
+//Display
 void display() {
 
 	int cnt = rear - front + 1;
@@ -55,7 +68,6 @@ void display() {
 	}
 
 }
-
 
 
 int main(void) {
